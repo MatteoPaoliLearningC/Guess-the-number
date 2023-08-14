@@ -1,7 +1,7 @@
 /*
   Author: Matteo Paoli
   Program: Guessing the number
-  Version: 1.2.2
+  Version: 1.2.3
 
   Description:
   A sample game I've created for learning C++
@@ -16,33 +16,13 @@
 */
 #include <cstdlib>
 #include <ctime>
-#include <fstream>
 #include <iostream>
 #include <map>
 #include <stdexcept>
 #include <string>
+#include "settings.h"
 
-const std::string CONFIG_FILE_NAME = "settings.cfg";
 const std::string MAX_RANGE_CONFIG_KEY = "maxRange";
-
-std::map<std::string, int> get_settings() {
-  std::ifstream settingsFile(CONFIG_FILE_NAME);
-  std::map<std::string, int> settings;
-  if (settingsFile.is_open()) {
-    std::string line;
-    while (std::getline(settingsFile, line)) {
-      size_t pos = line.find('=');
-      if (pos != std::string::npos) {
-        std::string key = line.substr(0, pos);
-        int value = std::stoi(line.substr(pos + 1));
-        settings[key] = value;
-      }
-    }
-    return settings;
-  } else {
-    throw std::runtime_error("Failed to open the file.");
-  }
-}
 
 bool game_iteration(int randomNumber) {
   int userGuess;
