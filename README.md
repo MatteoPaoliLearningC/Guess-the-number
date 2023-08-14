@@ -1,7 +1,7 @@
 # Number Guessing Game
 
 Author: Matteo Paoli
-Version: 1.2.2
+Version: 1.2.3
 Date: 14/08/2023 - last review 14/08/2023
 
 ## Description
