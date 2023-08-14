@@ -1,7 +1,7 @@
 /*
   Author: Matteo Paoli
   Program: Guessing the number
-  Version: 1.2.1
+  Version: 1.2.2
 
   Description:
   A sample game I've created for learning C++
@@ -22,8 +22,11 @@
 #include <stdexcept>
 #include <string>
 
+const std::string CONFIG_FILE_NAME = "settings.cfg";
+const std::string MAX_RANGE_CONFIG_KEY = "maxRange";
+
 std::map<std::string, int> get_settings() {
-  std::ifstream settingsFile("settings.cfg");
+  std::ifstream settingsFile(CONFIG_FILE_NAME);
   std::map<std::string, int> settings;
   if (settingsFile.is_open()) {
     std::string line;
@@ -65,7 +68,7 @@ int main() {
   std::srand(std::time(0));
 
   bool guessed = false;
-  int randomNumber = std::rand() % settings["maxRange"] + 1;
+  int randomNumber = std::rand() % settings[MAX_RANGE_CONFIG_KEY] + 1;
 
   for (int i = settings["attempts"]; i > 0; i--) {
     std::cout << std::to_string(i) << " attempts left" << std::endl;
