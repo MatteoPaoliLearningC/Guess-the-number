@@ -1,7 +1,7 @@
 /*
   Author: Matteo Paoli
   Program: Guessing the number
-  Version: 1.2.3
+  Version: 1.3.0
 
   Description:
   A sample game I've created for learning C++
@@ -20,9 +20,12 @@
 #include <map>
 #include <stdexcept>
 #include <string>
+
 #include "settings.h"
 
 const std::string MAX_RANGE_CONFIG_KEY = "maxRange";
+const std::string ATTEMPTS_CONFIG_KEY = "attempts";
+const std::string SW_VERSION = "1.3.0";
 
 bool game_iteration(int randomNumber) {
   int userGuess;
@@ -37,20 +40,40 @@ bool game_iteration(int randomNumber) {
   return userGuess == randomNumber;
 }
 
-int main() {
+int main(int argc, char *argv[]) {
+  bool debugMode = false;
+  bool guessed = false;
   std::map<std::string, int> settings;
+
+  for (int i = 0; i < argc; i++) {
+    if (std::string(argv[i]) == "--debug") {
+      debugMode = true;
+    }
+  }
+
   try {
     settings = get_settings();
   } catch (const std::exception &e) {
     std::cerr << "Error loading settings: " << e.what() << std::endl;
     return 1;
   }
+
   std::srand(std::time(0));
-
-  bool guessed = false;
   int randomNumber = std::rand() % settings[MAX_RANGE_CONFIG_KEY] + 1;
+// Clear the console
+#ifdef _WIN32
+  system("cls");
+#else
+  system("clear");  // For Unix-like systems
+#endif
+  std::cout << "GUESSING NUMBER GAME" << std::endl;
+  std::cout << "Developed by Matteo Paoli - v" << SW_VERSION << std::endl;
+  if (debugMode) {
+    std::cout << "WARNING: DEBUG MODE IS ENABLED" << std::endl;
+    std::cout << "DEBUG: randomNumber = " << randomNumber << std::endl;
+  }
 
-  for (int i = settings["attempts"]; i > 0; i--) {
+  for (int i = settings[ATTEMPTS_CONFIG_KEY]; i > 0; i--) {
     std::cout << std::to_string(i) << " attempts left" << std::endl;
     try {
       if (game_iteration(randomNumber)) {

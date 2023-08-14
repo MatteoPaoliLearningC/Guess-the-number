@@ -1,4 +1,5 @@
 *.out
+guessing_game
 .vscode
 .history
 .DS_Store

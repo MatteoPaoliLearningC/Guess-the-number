@@ -1,7 +1,7 @@
 # Number Guessing Game
 
 Author: Matteo Paoli
-Version: 1.2.3
+Version: 1.3.0
 Date: 14/08/2023 - last review 14/08/2023
 
 ## Description
@@ -17,4 +17,4 @@ A simple number guessing game implemented in C++. The game generates a random nu
 3. Compile the source files using `g++`:
 
    ```sh
-   g++ main.cpp settings_util.cpp -o guessing_game
+   g++ game.cpp settings.cpp -o guessing_game
