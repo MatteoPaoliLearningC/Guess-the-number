@@ -18,7 +18,7 @@
 #include <string>
 #include <vector>
 
-const std::string SW_VERSION = "0.1.0";
+const std::string SW_VERSION = "0.2.0";
 
 int main() {
   std::string userInput;
