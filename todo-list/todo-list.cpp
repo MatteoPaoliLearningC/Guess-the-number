@@ -1,7 +1,7 @@
 /*
   Author: Matteo Paoli
   Program: Todo list
-  Version: 0.3.0
+  Version: 0.3.1
 
   Description:
   My personal implementation of the most common programming exercise ever.
@@ -18,7 +18,13 @@
 #include <string>
 #include <vector>
 
-const std::string SW_VERSION = "0.3.0";
+const std::string SW_VERSION = "0.3.1";
+
+std::string getUserInput() {
+  std::string userInput;
+  std::getline(std::cin, userInput);
+  return userInput;
+}
 
 void printToDoTasks(const std::vector<std::string> &todoList) {
   for (size_t i = 0; i < todoList.size(); i++) {
@@ -29,8 +35,7 @@ void printToDoTasks(const std::vector<std::string> &todoList) {
 void addTask(std::vector<std::string> &todoList) {
   std::string userInput;
   std::cout << "Enter your activity: ";
-  std::getline(std::cin, userInput);
-  todoList.push_back(userInput);
+  todoList.push_back(getUserInput());
 }
 
 void deleteTask(std::vector<std::string> &todoList) {
@@ -38,15 +43,9 @@ void deleteTask(std::vector<std::string> &todoList) {
     std::cout << "You have no items in your list." << std::endl;
     return;
   }
-
   printToDoTasks(todoList);
-
-  size_t indexToRemove;
   std::cout << "Which one do you want to delete? ";
-  std::cin >> indexToRemove;
-  indexToRemove--;
-  std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
+  size_t indexToRemove = std::stoul(getUserInput()) - 1;
   if (indexToRemove >= 0 && indexToRemove < todoList.size()) {
     todoList.erase(todoList.begin() + indexToRemove);
   } else {
@@ -68,7 +67,7 @@ int main() {
       printToDoTasks(todoList);
     }
     std::cout << "What do you wanna do? (add / delete / edit)" << std::endl;
-    std::getline(std::cin, userInput);
+    userInput = getUserInput();
     if (userInput == "add") {
       addTask(todoList);
     } else if (userInput == "delete") {
