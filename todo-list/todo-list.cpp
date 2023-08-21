@@ -1,7 +1,7 @@
 /*
   Author: Matteo Paoli
   Program: Todo list
-  Version: 0.3.1
+  Version: 1.0.0
 
   Description:
   My personal implementation of the most common programming exercise ever.
@@ -12,13 +12,13 @@
   Notes:
   [Any additional notes or information about the program.]
 
-  Date: 15/08/2023 - last review 20/08/2023
+  Date: 15/08/2023 - last review 21/08/2023
 */
 #include <iostream>
 #include <string>
 #include <vector>
 
-const std::string SW_VERSION = "0.3.1";
+const std::string SW_VERSION = "1.0.0";
 
 std::string getUserInput() {
   std::string userInput;
@@ -53,6 +53,20 @@ void deleteTask(std::vector<std::string> &todoList) {
   }
 }
 
+void editTask(std::vector<std::string> &todoList) {
+  if (todoList.empty()) {
+    std::cout << "You have no items in your list." << std::endl;
+    return;
+  }
+  printToDoTasks(todoList);
+  std::cout << "Which one do you want to edit? ";
+  size_t indexToEdit = std::stoul(getUserInput()) - 1;
+  if (indexToEdit >= 0 && indexToEdit < todoList.size()) {
+    std::cout << "Edit the item" << std::endl;
+    todoList[indexToEdit] = getUserInput();
+  }
+}
+
 int main() {
   std::string userInput;
   std::vector<std::string> todoList;
@@ -73,7 +87,7 @@ int main() {
     } else if (userInput == "delete") {
       deleteTask(todoList);
     } else if (userInput == "edit") {
-      // TODO
+      editTask(todoList);
     } else {
       std::cout << "Invalid input" << std::endl;
     }
