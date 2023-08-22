@@ -1,6 +1,7 @@
 *.out
 guessing_game
 todo_list
+todo-list/todo.txt
 .vscode
 .history/
 .DS_Store
